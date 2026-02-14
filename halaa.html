@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Valentine’s 💘</title>
+  <style>
+    :root{
+      --bg1:#ffdde1; --bg2:#ee9ca7; --card:#ffffffcc; --ink:#2b2b2b;
+      --pink:#ff3d6e; --pink2:#ff6fa1; --shadow: 0 18px 45px rgba(0,0,0,.18);
+      --radius: 24px; --green:#36d26c;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background: radial-gradient(1200px 900px at 20% 10%, var(--bg1), transparent 60%),
+                  radial-gradient(1000px 700px at 80% 20%, #ffd1dc, transparent 55%),
+                  linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* floating hearts background */
+    .hearts{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:0;}
+    .heart{
+      position:absolute; bottom:-60px; width:22px;height:22px;
+      transform: rotate(45deg); opacity:.8;
+      animation: floatUp linear infinite;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.12));
+    }
+    .heart:before,.heart:after{content:""; position:absolute; width:22px;height:22px; background:inherit; border-radius:50%;}
+    .heart:before{ left:-11px; top:0; } .heart:after{ left:0; top:-11px; }
+    @keyframes floatUp{from{transform: translateY(0) rotate(45deg);} to{transform: translateY(-120vh) rotate(45deg);} }
+
+    .wrap{
+      position:relative; z-index:1; max-width:980px; margin:0 auto;
+      padding:42px 18px 80px;
+      display:grid; gap:18px; grid-template-columns: 1.1fr .9fr;
+    }
+    @media (max-width: 860px){ .wrap{ grid-template-columns: 1fr; padding-top:28px; } }
+
+    header{grid-column:1 / -1; display:flex; align-items:center; justify-content:space-between; gap:12px;}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px;}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:999px;
+      background:rgba(255,255,255,.55); backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.10); font-size:14px;
+    }
+    .btn{
+      border:0; cursor:pointer; padding:10px 14px; border-radius:999px; font-weight:700;
+      background:rgba(255,255,255,.65); backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.10);
+      transition: transform .12s ease, background .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background:rgba(255,255,255,.80); }
+    .btn:active{ transform: translateY(1px); }
+
+    .card{
+      background: var(--card); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: var(--radius); box-shadow: var(--shadow); padding:22px;
+    }
+    .hero h1{margin:0 0 10px; font-size: clamp(30px, 4.2vw, 54px); line-height:1.05; letter-spacing:-.5px;}
+    .hero p{margin:0 0 16px; font-size:16.5px; opacity:.92; max-width:52ch;}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+    .chip{padding:8px 10px; border-radius:999px; font-size:13px; font-weight:700; background:rgba(255,255,255,.55);}
+
+    /* cat + lilies mini cards */
+    .artRow{display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-top:12px;}
+    .artCard{
+      flex: 1 1 220px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.70);
+      border:1px solid rgba(0,0,0,.06);
+      padding:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height: 180px;
+      position:relative;
+      overflow:hidden;
+    }
+    .artHint{
+      position:absolute; bottom:10px; left:12px;
+      font-size:12.5px; font-weight:900;
+      background: rgba(255,61,110,.14);
+      color:#b1002c;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,61,110,.22);
+    }
+    .sparkle{
+      position:absolute; top:-30px; right:-30px;
+      width:110px; height:110px;
+      background: radial-gradient(circle, rgba(255,255,255,.9), transparent 60%);
+      opacity:.65;
+      transform: rotate(18deg);
+    }
+    .pulseEyes{
+      transform-origin:center;
+      animation: eyeGlow 2.2s ease-in-out infinite;
+      filter: drop-shadow(0 0 10px rgba(54,210,108,.55));
+    }
+    @keyframes eyeGlow{0%,100%{transform:scale(1);opacity:.95}50%{transform:scale(1.08);opacity:1}}
+
+    /* letter */
+    .letterTop{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;}
+    .envelope{
+      width:64px;height:46px; position:relative; flex:0 0 auto;
+      border-radius:14px; background: linear-gradient(135deg, #fff, #ffe6ee);
+      box-shadow: 0 12px 25px rgba(0,0,0,.10); border:1px solid rgba(0,0,0,.05);
+    }
+    .envelope:before{
+      content:""; position:absolute; inset:0;
+      background:
+        linear-gradient(45deg, transparent 48%, rgba(255,61,110,.25) 49%, rgba(255,61,110,.25) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, rgba(255,61,110,.25) 49%, rgba(255,61,110,.25) 51%, transparent 52%);
+      opacity:.55; border-radius:14px;
+    }
+
+    .letterBody{
+      background: rgba(255,255,255,.75);
+      border-radius: 18px; padding:16px; border:1px solid rgba(0,0,0,.06);
+      min-height:190px; position:relative; overflow:hidden;
+    }
+
+    /* CLOSED state */
+    .letterBody.closed .letterText{ opacity:0; transform: translateY(10px); }
+    .letterBody.closed .seal{ opacity:.75; }
+
+    /* overlay that hides message */
+    .cover{
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+      padding:18px;
+      background:
+        radial-gradient(800px 200px at 30% 10%, rgba(255,255,255,.95), rgba(255,255,255,.72)),
+        linear-gradient(135deg, rgba(255,61,110,.14), rgba(255,255,255,.55));
+      backdrop-filter: blur(10px);
+      border-radius: 18px;
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    .coverInner{
+      text-align:center;
+      background: rgba(255,255,255,.70);
+      border:1px solid rgba(0,0,0,.06);
+      padding:16px 16px;
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.10);
+      max-width: 340px;
+    }
+    .coverInner .big{ font-size:20px; font-weight:950; }
+    .coverInner .small{ margin-top:6px; font-size:13px; font-weight:800; opacity:.85; }
+    .coverInner .mini{ margin-top:10px; font-size:12.5px; font-weight:900; color:#b1002c;
+      display:inline-block; padding:7px 10px; border-radius:999px; background: rgba(255,61,110,.14);
+      border:1px solid rgba(255,61,110,.22);
+    }
+
+    /* OPEN state animation */
+    .letterBody.open .cover{ opacity:0; transform: scale(1.02); pointer-events:none; }
+    .letterBody.open .letterText{
+      opacity:1; transform: translateY(0);
+      transition: opacity .5s ease .12s, transform .5s ease .12s;
+    }
+
+    .seal{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px;
+      background: rgba(255,61,110,.14); color:#b1002c;
+      font-weight:800; font-size:13px; margin-bottom:10px; user-select:none;
+    }
+    .letterText{
+      margin:0;
+      font-size:15.5px;
+      line-height:1.6;
+      white-space:pre-wrap;
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    .openBtn{
+      margin-top:14px; width:100%; padding:12px 14px; border-radius:14px;
+      background: linear-gradient(135deg, var(--pink), var(--pink2));
+      color:white; font-weight:900; border:0; cursor:pointer;
+      box-shadow: 0 16px 35px rgba(255,61,110,.35);
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    .openBtn:hover{ transform: translateY(-1px); } .openBtn:active{ transform: translateY(1px); }
+
+    /* dates */
+    .dates h2{ margin:0 0 10px; font-size:22px; }
+    .grid{display:grid; grid-template-columns: 1fr 1fr; gap:10px;}
+    @media (max-width: 860px){ .grid{ grid-template-columns: 1fr; } }
+    .option{
+      padding:14px; border-radius:18px; border:1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.7); cursor:pointer;
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+      transition: transform .12s ease, background .12s ease; user-select:none;
+    }
+    .option:hover{ transform: translateY(-1px); background: rgba(255,255,255,.85); }
+    .optTitle{ font-weight:900; } .optSub{ font-size:13px; opacity:.85; margin-top:4px; }
+    .pill{font-size:12px; font-weight:900; padding:6px 10px; border-radius:999px; background: rgba(255,61,110,.14); color:#b1002c; white-space:nowrap;}
+    .result{margin-top:12px; padding:12px 14px; border-radius:18px; border:1px dashed rgba(255,61,110,.35); background: rgba(255,255,255,.65); font-weight:800;}
+
+    canvas#confetti{position:fixed; inset:0; pointer-events:none; z-index:10;}
+    footer{grid-column:1 / -1; text-align:center; opacity:.85; margin-top:6px; font-weight:700;}
+    .tiny{ font-size:12.5px; opacity:.8; font-weight:700; }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+  <canvas id="confetti"></canvas>
+
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <span style="font-size:22px">💘</span>
+        <span>Valentine’s Page</span>
+        <span class="badge">Salah × Judy ✨</span>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+        <button class="btn" id="musicBtn">🎵 Music: Off</button>
+        <button class="btn" id="burstBtn">💥 Hearts Burst</button>
+      </div>
+    </header>
+
+    <section class="card hero">
+      <h1>Happy Valentine’s, <span id="theirName">Judy</span> 💗</h1>
+      <p>A tiny website just for you — with the things you love: a black cat with green eyes, and lilies 🌸</p>
+      <div class="chips">
+        <div class="chip">🐈‍⬛ Green eyes</div>
+        <div class="chip">🌸 Lilies</div>
+        <div class="chip">💌 A letter from Salah</div>
+      </div>
+
+      <div class="artRow">
+        <div class="artCard">
+          <div class="sparkle"></div>
+          <!-- black cat -->
+          <svg width="220" height="160" viewBox="0 0 220 160" role="img" aria-label="Black cat with green eyes">
+            <path d="M165 118c18 0 32 10 32 22 0 8-7 14-16 14-7 0-12-3-14-8 6-1 10-5 10-9 0-6-6-10-12-10-6 0-11 4-13 9-5-5-8-11-8-18 0-10 9-20 21-20z" fill="#151515" opacity="0.95"/>
+            <ellipse cx="120" cy="116" rx="58" ry="34" fill="#111"/>
+            <circle cx="86" cy="78" r="42" fill="#101010"/>
+            <path d="M58 52 L45 22 L76 38 Z" fill="#0b0b0b"/>
+            <path d="M114 52 L128 22 L96 38 Z" fill="#0b0b0b"/>
+            <path d="M58 50 L52 32 L70 41 Z" fill="#2a0f18" opacity="0.55"/>
+            <path d="M114 50 L121 32 L102 41 Z" fill="#2a0f18" opacity="0.55"/>
+            <g class="pulseEyes">
+              <ellipse cx="73" cy="78" rx="11" ry="14" fill="var(--green)"/>
+              <ellipse cx="101" cy="78" rx="11" ry="14" fill="var(--green)"/>
+              <rect x="71.5" y="67" width="3" height="22" rx="1.5" fill="#071107"/>
+              <rect x="99.5" y="67" width="3" height="22" rx="1.5" fill="#071107"/>
+              <circle cx="69" cy="72" r="2" fill="#eafff0" opacity="0.85"/>
+              <circle cx="97" cy="72" r="2" fill="#eafff0" opacity="0.85"/>
+            </g>
+            <path d="M87 92 l-6 5 a10 10 0 0 0 12 0z" fill="#ff6fa1" opacity="0.95"/>
+            <path d="M87 98c-3 6-10 8-16 7" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"/>
+            <path d="M87 98c3 6 10 8 16 7" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="2" stroke-linecap="round"/>
+            <path d="M54 92h26" stroke="#fff" stroke-opacity=".45" stroke-width="2" stroke-linecap="round"/>
+            <path d="M52 100h28" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linecap="round"/>
+            <path d="M120 92H94" stroke="#fff" stroke-opacity=".45" stroke-width="2" stroke-linecap="round"/>
+            <path d="M122 100H94" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linecap="round"/>
+            <path d="M130 106c0-6 8-8 11-2 3-6 11-4 11 2 0 8-11 14-11 14s-11-6-11-14z" fill="#ff3d6e" opacity="0.95"/>
+          </svg>
+          <div class="artHint">🐈‍⬛ Judy’s cat</div>
+        </div>
+
+        <div class="artCard">
+          <div class="sparkle"></div>
+          <!-- lilies -->
+          <svg width="240" height="170" viewBox="0 0 240 170" role="img" aria-label="Lilies">
+            <path d="M120 165c-6-28 10-52 22-78" stroke="#2f9e57" stroke-width="6" stroke-linecap="round"/>
+            <path d="M120 165c2-32-12-58-26-86" stroke="#2f9e57" stroke-width="6" stroke-linecap="round"/>
+            <path d="M108 120c-26 0-38 18-46 30 24-6 41-14 46-30z" fill="#43c96b" opacity="0.9"/>
+            <path d="M135 118c26 0 38 18 46 30-24-6-41-14-46-30z" fill="#43c96b" opacity="0.9"/>
+            <g transform="translate(70,35)">
+              <path d="M50 40c-18-6-28-24-22-40 18 6 28 24 22 40z" fill="#ffffff" opacity="0.95"/>
+              <path d="M50 40c18-6 28-24 22-40-18 6-28 24-22 40z" fill="#ffffff" opacity="0.95"/>
+              <path d="M50 40c-20 4-40-6-46-24 20-4 40 6 46 24z" fill="#fff" opacity="0.9"/>
+              <path d="M50 40c20 4 40-6 46-24-20-4-40 6-46 24z" fill="#fff" opacity="0.9"/>
+              <path d="M50 40c-6 18-24 28-40 22 6-18 24-28 40-22z" fill="#fff" opacity="0.92"/>
+              <path d="M50 40c6 18 24 28 40 22-6-18-24-28-40-22z" fill="#fff" opacity="0.92"/>
+              <circle cx="50" cy="40" r="9" fill="#ffd36b"/>
+              <path d="M45 22c4 6 6 12 5 18" stroke="#9a6b00" stroke-width="3" stroke-linecap="round"/>
+              <path d="M55 22c-4 6-6 12-5 18" stroke="#9a6b00" stroke-width="3" stroke-linecap="round"/>
+            </g>
+            <g transform="translate(120,55) scale(0.9)">
+              <path d="M50 40c-18-6-28-24-22-40 18 6 28 24 22 40z" fill="#ffffff" opacity="0.95"/>
+              <path d="M50 40c18-6 28-24 22-40-18 6-28 24-22 40z" fill="#ffffff" opacity="0.95"/>
+              <path d="M50 40c-20 4-40-6-46-24 20-4 40 6 46 24z" fill="#fff" opacity="0.9"/>
+              <path d="M50 40c20 4 40-6 46-24-20-4-40 6-46 24z" fill="#fff" opacity="0.9"/>
+              <path d="M50 40c-6 18-24 28-40 22 6-18 24-28 40-22z" fill="#fff" opacity="0.92"/>
+              <path d="M50 40c6 18 24 28 40 22-6-18-24-28-40-22z" fill="#fff" opacity="0.92"/>
+              <circle cx="50" cy="40" r="9" fill="#ffd36b"/>
+              <path d="M45 22c4 6 6 12 5 18" stroke="#9a6b00" stroke-width="3" stroke-linecap="round"/>
+              <path d="M55 22c-4 6-6 12-5 18" stroke="#9a6b00" stroke-width="3" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <div class="artHint">🌸 Lilies for Judy</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="letterTop">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div class="envelope"></div>
+          <div>
+            <div style="font-weight:900; font-size:18px;">A letter for you</div>
+            <div class="tiny">It’s sealed… until you open it 💗</div>
+          </div>
+        </div>
+        <div class="seal">🩷 Sealed</div>
+      </div>
+
+      <div class="letterBody closed" id="letterBody" aria-live="polite">
+        <div class="seal">To: <span id="toLine">Judy</span> 💘</div>
+
+        <!-- romantic message (hidden until open) -->
+        <p class="letterText" id="letterText">
+Judy,
+
+Happy Valentine’s Day, my love 💗
+
+You have this way of making everything feel softer and brighter — like the world calms down the moment you’re in it.
+I love your heart, your smile, and the little things that are so “you”…
+the lilies, the black cat with those green eyes, and the gentle way you notice beauty.
+
+If I could, I’d bottle the feeling I get when I’m with you — safe, grateful, and completely happy.
+You’re not just my Valentine… you’re my favorite person.
+
+Always,
+<span id="fromLine">Salah</span>
+        </p>
+
+        <!-- cover that makes it "closed" -->
+        <div class="cover" id="cover" aria-hidden="false">
+          <div class="coverInner">
+            <div class="big">💌 Sealed Letter</div>
+            <div class="small">Open it to reveal what Salah wrote for Judy.</div>
+            <div class="mini">Tap “Open my letter” ✨</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="openBtn" id="openBtn">Open my letter 💌</button>
+    </section>
+
+    <section class="card dates">
+      <h2>Choose our Valentine’s date 💞</h2>
+      <div class="grid">
+        <div class="option" data-pick="Movie night + snacks 🍿">
+          <div><div class="optTitle">Movie night</div><div class="optSub">Blanket, snacks, and no interruptions.</div></div>
+          <div class="pill">Cozy</div>
+        </div>
+        <div class="option" data-pick="Cafe + dessert 🍰">
+          <div><div class="optTitle">Cafe date</div><div class="optSub">Hot chocolate + dessert + vibes.</div></div>
+          <div class="pill">Sweet</div>
+        </div>
+        <div class="option" data-pick="Walk + pictures 📸">
+          <div><div class="optTitle">Walk & photos</div><div class="optSub">Golden hour + cute pictures.</div></div>
+          <div class="pill">Romantic</div>
+        </div>
+        <div class="option" data-pick="Surprise date 😏">
+          <div><div class="optTitle">Surprise me</div><div class="optSub">You choose… I’ll say yes.</div></div>
+          <div class="pill">Bold</div>
+        </div>
+      </div>
+      <div class="result" id="result">Pick an option above 👆</div>
+    </section>
+
+    <footer>
+      <div>Made with love for Judy 💘</div>
+      <div class="tiny">Song file: put <b>those-eyes.mp3</b> next to this HTML.</div>
+    </footer>
+  </div>
+
+  <!-- Put the song MP3 in the same folder and name it: those-eyes.mp3 -->
+  <audio id="bgMusic" loop>
+    <source src="those-eyes.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Names
+    const NAME = "Judy";
+    const FROM = "Salah";
+    document.getElementById("toLine").textContent = NAME;
+    document.getElementById("fromLine").textContent = FROM;
+
+    // Floating hearts
+    const heartsWrap = document.getElementById("hearts");
+    const colors = ["#ff3d6e","#ff6fa1","#ff87b7","#ff4d88","#ffffff"];
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      const size = 10 + Math.random()*22;
+      h.style.width = size+"px";
+      h.style.height = size+"px";
+      h.style.left = (Math.random()*100)+"vw";
+      h.style.background = colors[Math.floor(Math.random()*colors.length)];
+      h.style.opacity = (0.35 + Math.random()*0.6).toFixed(2);
+      const duration = 6 + Math.random()*10;
+      h.style.animationDuration = duration+"s";
+      h.style.animationDelay = (Math.random()*2)+"s";
+      heartsWrap.appendChild(h);
+      setTimeout(()=>h.remove(), (duration+2)*1000);
+    }
+    for(let i=0;i<24;i++) spawnHeart();
+    setInterval(spawnHeart, 450);
+
+    // Confetti hearts
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    function resize(){
+      canvas.width = window.innerWidth * devicePixelRatio;
+      canvas.height = window.innerHeight * devicePixelRatio;
+      ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    const particles = [];
+    function burstHearts(count=120){
+      const cx = window.innerWidth/2;
+      const cy = window.innerHeight/2.3;
+      for(let i=0;i<count;i++){
+        const angle = Math.random()*Math.PI*2;
+        const speed = 3 + Math.random()*6;
+        particles.push({
+          x: cx + (Math.random()*60-30),
+          y: cy + (Math.random()*60-30),
+          vx: Math.cos(angle)*speed,
+          vy: Math.sin(angle)*speed - 2.5,
+          g: 0.12 + Math.random()*0.08,
+          life: 90 + Math.random()*40,
+          r: (Math.random()*Math.PI),
+          vr: (Math.random()*0.2-0.1),
+          s: 5 + Math.random()*7,
+          c: colors[Math.floor(Math.random()*colors.length)]
+        });
+      }
+    }
+    function tick(){
+      ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+      for(let i=particles.length-1;i>=0;i--){
+        const p = particles[i];
+        p.vy += p.g; p.x += p.vx; p.y += p.vy; p.r += p.vr;
+        ctx.globalAlpha = Math.max(0, Math.min(1, p.life/120));
+        ctx.fillStyle = p.c;
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.beginPath();
+        ctx.moveTo(0, p.s*0.6);
+        ctx.bezierCurveTo(0, 0, -p.s, 0, -p.s, p.s*0.9);
+        ctx.bezierCurveTo(-p.s, p.s*1.6, -p.s*0.2, p.s*2.0, 0, p.s*2.4);
+        ctx.bezierCurveTo(p.s*0.2, p.s*2.0, p.s, p.s*1.6, p.s, p.s*0.9);
+        ctx.bezierCurveTo(p.s, 0, 0, 0, 0, p.s*0.6);
+        ctx.closePath(); ctx.fill(); ctx.restore();
+        p.life -= 1;
+        if(p.life <= 0 || p.y > window.innerHeight + 80) particles.splice(i,1);
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(tick);
+    }
+    tick();
+
+    // Date picker
+    const result = document.getElementById("result");
+    document.querySelectorAll(".option").forEach(opt=>{
+      opt.addEventListener("click", ()=>{
+        const pick = opt.getAttribute("data-pick");
+        result.textContent = `Judy chose: ${pick} — Salah is booking it 😄💞`;
+        burstHearts(90);
+      });
+    });
+
+    // Music toggle
+    const musicBtn = document.getElementById("musicBtn");
+    const bgMusic = document.getElementById("bgMusic");
+    let musicOn = false;
+
+    async function toggleMusic(forceOn=false){
+      try{
+        if(forceOn && !musicOn){
+          await bgMusic.play();
+          musicOn = true;
+          musicBtn.textContent = "🎵 Music: On";
+          return;
+        }
+        if(!musicOn){
+          await bgMusic.play();
+          musicOn = true;
+          musicBtn.textContent = "🎵 Music: On";
+        }else{
+          bgMusic.pause();
+          musicOn = false;
+          musicBtn.textContent = "🎵 Music: Off";
+        }
+      }catch(e){
+        alert("Put a file named 'those-eyes.mp3' next to this HTML (same folder), then try again 🎵");
+      }
+    }
+    musicBtn.addEventListener("click", ()=>toggleMusic(false));
+
+    // Hearts burst button
+    document.getElementById("burstBtn").addEventListener("click", ()=>burstHearts(160));
+
+    // OPEN letter: reveal + burst + (optional) start music
+    const openBtn = document.getElementById("openBtn");
+    const letterBody = document.getElementById("letterBody");
+    openBtn.addEventListener("click", async ()=>{
+      letterBody.classList.remove("closed");
+      letterBody.classList.add("open");
+      burstHearts(160);
+
+      // try to start music when opening (counts as a user gesture)
+      await toggleMusic(true);
+
+      openBtn.textContent = "Opened 💗";
+      openBtn.disabled = true;
+      openBtn.style.opacity = .85;
+    });
+  </script>
+</body>
+</html>
